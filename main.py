@@ -1,7 +1,7 @@
 import cv2
 import time
-import Get_frame_module
-import Yolo_detect_module
+import modules.Get_frame as Get_frame
+import modules.Yolo_detect as Yolo_detect
 
 def main():
     window_name = "Traffic Camera AI Detection"
@@ -10,7 +10,7 @@ def main():
 
     while True:
         start_t = time.time()
-        frame = Get_frame_module.get_traffic_image("Camera 1")
+        frame = Get_frame.get_traffic_image("Camera 1")
         if frame is not None:
             (annotated_frame,
              person_count,
@@ -19,7 +19,7 @@ def main():
              bus_count,
              truck_count,
              total_vehicles) \
-                = Yolo_detect_module.image_processing(frame)
+                = Yolo_detect.image_processing(frame)
 
             print(f"Detected - "
                   f"Persons: {person_count}, "
