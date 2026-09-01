@@ -19,10 +19,16 @@ Instructor: **Nguyễn Mạnh Hùng**
 Live camera feed source: [giaothong.hochiminhcity.gov.vn](https://giaothong.hochiminhcity.gov.vn)
 
 <p align="center">
-  <img src="runs/detect/predict/1.jpg" alt="YOLO vehicle detection sample on the Thu Duc intersection camera feed" width="720">
+  <img src="runs/supervision_test9.png" alt="YOLO vehicle detection sample on the Thu Duc intersection camera feed" width="720">
 </p>
 
 *Sample output: real-time camera frame with vehicle detection (car, bus, truck, traffic light) overlaid by the YOLO model.*
+
+<p align="center">
+  <img src="runs/supervision_test7.png" alt="YOLO vehicle detection upgraded with Supervision Logic" width="720">
+</p>
+
+*Upgrade the algorithm with Supervision to handle small and overlapping objects*
 
 ---
 
