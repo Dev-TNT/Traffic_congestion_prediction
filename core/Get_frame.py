@@ -20,9 +20,9 @@ def get_traffic_image(name="Camera 1"):
             frame = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
             return frame
         else:
-            print(f"Lỗi phản hồi từ server: {response.status_code}")
+                print(f"Server response error: {response.status_code}")
     except requests.exceptions.RequestException as e:
-        print(f"Lỗi đường truyền: {e}")
+            print(f"Network error: {e}")
 
     return None
 
@@ -34,7 +34,7 @@ cam_id = {
     "Camera 2": "56df81d8c062921100c143de",
     "Camera 3": "56df8159c062921100c143dc"
 }
-print(f"Khởi động luồng thu thập dữ liệu cho Camera: {list(cam_id.keys())}...")
+print(f"Starting data collection loop for camera: {list(cam_id.keys())}...")
 
 if __name__ == "__main__":
     while True:
@@ -42,7 +42,7 @@ if __name__ == "__main__":
         if frame is not None:
             cv2.imshow("Traffic Camera Feed", frame)
         else:
-            print("Không nhận được hình ảnh từ camera.")
+                print("No image received from the camera.")
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
