@@ -1,7 +1,7 @@
 import cv2
 import time
-import modules.Get_frame as Get_frame
-import modules.Yolo_detect as Yolo_detect
+import core.Get_frame as Get_frame
+import core.Yolo_detect as Yolo_detect
 
 def main():
     window_name = "Traffic Camera AI Detection"
