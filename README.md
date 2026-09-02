@@ -166,20 +166,38 @@ This is how the sample frame embedded at the top of this README (`runs/detect/pr
 
 ---
 
-## 📁 Repository Structure (planned)
 
-```
-.
-├── main.py                     # Live detection preview script
-├── data/                       # Collected CSV/SQLite logs
-├── runs/detect/predict/        # YOLO inference output samples
-├── notebooks/                  # EDA & modeling notebooks
-├── models/                     # Trained regressor artifacts (.pkl/.json)
-├── .github/workflows/          # Scheduled collection & retraining pipelines
-└── README.md
-```
+## 📁 Repository Structure
 
----
+```text
+Traffic_congestion_prediction/
+├── main.py                    # Application entry point (Initializes UI & background threads)
+├── environment.yml            # Conda environment configuration
+├── README.md                  # Project documentation
+├── yolo26x.pt                 # YOLO weights (Large, high accuracy)
+├── yolo26n.pt                 # YOLO weights (Nano, fast)
+│
+├── core/                      # Backend Logic & Core Processing
+│   ├── Get_frame.py           # Snapshot crawler from HCMC traffic camera API
+│   ├── Yolo_detect.py         # YOLOv8 vehicle detection & counting via Supervision
+│   └── vision_worker.py       # Background worker thread (Python Thread + PyQt Signals)
+│
+├── ui/                        # Frontend User Interface
+│   ├── main_window.py         # Main window & Fluent Design sidebar navigation
+│   └── tabs/                  # Functional dashboard tabs
+│       ├── home_tab.py        # Home page & student/course metadata
+│       ├── camera_tab.py      # Live camera feed & YOLO toggle switch
+│       └── dashboard_tab.py   # Prediction view & Matplotlib traffic charts
+│
+├── utils/                     # Shared system utilities
+│   └── app_state.py           # Application state management (YOLO On/Off flags)
+│
+├── data/                      # Directory for logging collected data (CSV/SQLite)
+├── runs/                      # YOLO inference output samples
+├── notebooks/                 # Jupyter Notebooks for EDA & model training
+├── models/                    # Storage for trained regressor artifacts (.pkl/.json)
+└── .github/workflows/         # CI/CD pipelines for automated data collection
+
 
 ## 📄 License / Data Disclaimer
 
