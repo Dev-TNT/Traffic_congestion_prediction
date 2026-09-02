@@ -25,7 +25,7 @@ class CameraWorker(QThread):
 
         while not self.isInterruptionRequested():
             start_t = time.time()
-            frame = Get_frame.get_traffic_image("Camera 3")
+            frame = Get_frame.get_traffic_image("Camera 1")
 
             if frame is not None:
                 if app_state.show_yolo_frame:
