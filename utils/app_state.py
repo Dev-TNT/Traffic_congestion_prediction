@@ -8,9 +8,11 @@ class AppState:
         self.show_yolo_frame = True
 
         self.camera_ids = {
-            "Camera 1": "56df8198c062921100c143dd",
-            "Camera 2": "56df81d8c062921100c143de",
-            "Camera 3": "56df8159c062921100c143dc",
+            "Camera 1": "5d9ddd49766c880017188c94",
+            "Camera 2": "5d9ddec9766c880017188c9c",
+            "Camera 3": "5b0e1faacddcc80011ceb449",
+            "Camera 4": "5d9ddf49766c880017188ca0",
+            "Camera 5": "5d9dde1f766c880017188c98"
         }
         self.selected_camera_name = "Camera 1"
 

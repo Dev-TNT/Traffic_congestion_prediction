@@ -11,7 +11,7 @@ def callback(image_slice: np.ndarray) -> sv.Detections:
     return sv.Detections.from_ultralytics(result)
 
 def image_processing(frame):
-    slicer = sv.InferenceSlicer(callback=callback, slice_wh=(300, 300))
+    slicer = sv.InferenceSlicer(callback=callback, slice_wh=(256, 256))
     detections = slicer(frame)
 
     # Đếm theo class ID của YOLO
@@ -22,7 +22,7 @@ def image_processing(frame):
     motorbike_count = np.sum(class_ids == 3)
     bus_count = np.sum(class_ids == 5)
     truck_count = np.sum(class_ids == 7)
-    total_vehicles = len(detections)
+    total_vehicles = car_count + motorbike_count + bus_count + truck_count
 
     print(f"Person: {person_count}")
     print(f"Car: {car_count}")
@@ -31,7 +31,7 @@ def image_processing(frame):
     print(f"Truck: {truck_count}")
     print(f"Total vehicles: {total_vehicles}")
 
-    box_annotator = sv.BoxAnnotator()
+    box_annotator = sv.BoxAnnotator(thickness=1)
 
     annotated_frame = box_annotator.annotate(
         scene=frame.copy(),
