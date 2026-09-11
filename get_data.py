@@ -22,9 +22,9 @@ def save_rows_to_csv(rows, output_path):
         "motorbike",
         "bus",
         "truck",
-        "total_vehicles",
-        "weighted_traffic_impact",
-        "weighted_traffic_impact_norm",
+        "total",
+        "WTI",
+        "WTI_norm",
     ]
     directory = os.path.dirname(output_path)
     if directory:
