@@ -37,9 +37,7 @@ def image_processing(frame):
             + int(truck_count) * truck_w
     )
 
-    weighted_traffic_impact_norm = (
-        weighted_traffic_impact / total_vehicles if total_vehicles > 0 else 0.0
-    )
+    weighted_traffic_impact_norm = weighted_traffic_impact * (1.0 + np.log1p(total_vehicles))
 
     print(f"Person: {person_count}")
     print(f"Car: {car_count}")
