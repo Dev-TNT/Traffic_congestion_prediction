@@ -38,6 +38,8 @@ class CameraWorker(QThread):
                         bus_count,
                         truck_count,
                         total_vehicles,
+                        weighted_traffic_impact,
+                        weighted_traffic_impact_norm,
                     ) = Yolo_detect.image_processing(frame)
 
                     app_state.person_count = int(person_count)
@@ -46,6 +48,8 @@ class CameraWorker(QThread):
                     app_state.bus_count = int(bus_count)
                     app_state.truck_count = int(truck_count)
                     app_state.total_vehicles = int(total_vehicles)
+                    app_state.weighted_traffic_impact = float(weighted_traffic_impact)
+                    app_state.weighted_traffic_impact_norm = float(weighted_traffic_impact_norm)
 
 
 

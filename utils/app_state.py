@@ -22,6 +22,8 @@ class AppState:
         self.bus_count = 0
         self.truck_count = 0
         self.total_vehicles = 0
+        self.weighted_traffic_impact = 0.0
+        self.weighted_traffic_impact_norm = 0.0
 
 
 app_state = AppState()

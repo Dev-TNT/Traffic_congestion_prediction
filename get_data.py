@@ -9,17 +9,27 @@ import cv2
 from core.Get_frame import get_traffic_image, cam_id
 from core.Yolo_detect import image_processing
 
-DEFAULT_OUTPUT = "data.csv"
+DEFAULT_OUTPUT = "runs/testdata.csv"
 DEFAULT_CAMERA = "Camera 1"
 DEFAULT_MAX_SECONDS = 24 * 60 * 60
 
 
 def save_rows_to_csv(rows, output_path):
-    fieldnames = ["timestamp", "person", "car", "motorbike", "bus", "truck", "total_vehicles"]
+    fieldnames = [
+        "timestamp",
+        "person",
+        "car",
+        "motorbike",
+        "bus",
+        "truck",
+        "total_vehicles",
+        "weighted_traffic_impact",
+        "weighted_traffic_impact_norm",
+    ]
     directory = os.path.dirname(output_path)
     if directory:
         os.makedirs(directory, exist_ok=True)
-
+        
     with open(output_path, "w", newline="", encoding="utf-8") as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
@@ -58,7 +68,17 @@ def collect_data(camera_name=DEFAULT_CAMERA, output_path=DEFAULT_OUTPUT, max_sec
                         cv2.imshow(window_name, frame)
                 else:
                     last_signature = signature
-                    annotated_frame, person, car, motorbike, bus, truck, total = image_processing(frame)
+                    (
+                        annotated_frame,
+                        person,
+                        car,
+                        motorbike,
+                        bus,
+                        truck,
+                        total,
+                        weighted_traffic_impact,
+                        weighted_traffic_impact_norm,
+                    ) = image_processing(frame)
                     last_annotated_frame = annotated_frame
                     cv2.imshow(window_name, annotated_frame)
 
@@ -70,7 +90,9 @@ def collect_data(camera_name=DEFAULT_CAMERA, output_path=DEFAULT_OUTPUT, max_sec
                         "motorbike": int(motorbike),
                         "bus": int(bus),
                         "truck": int(truck),
-                        "total_vehicles": int(total),
+                        "total": int(total),
+                        "WTI": float(weighted_traffic_impact),
+                        "WTI_norm": float(weighted_traffic_impact_norm),
                     })
             else:
                 print("Không nhận được hình ảnh từ camera. Đang thử lại...")
