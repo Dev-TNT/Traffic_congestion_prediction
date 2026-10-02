@@ -5,7 +5,7 @@ class AppState:
     """Stores UI choices and the latest vehicle-detection results."""
 
     def __init__(self) -> None:
-        self.show_yolo_frame = True
+        self.show_yolo_frame = False
 
         self.camera_ids = {
             "Camera 1": "5d9ddd49766c880017188c94",

@@ -159,7 +159,8 @@ class CameraTab(QFrame):
     def _refresh_statistics(self) -> None:
         """Refresh the stats card from the latest worker-state snapshot."""
         for state_attribute, (title, label) in self._statistics_labels.items():
-            label.setText(f"{title}: {getattr(app_state, state_attribute)}")
+            value = getattr(app_state, state_attribute) if app_state.show_yolo_frame else "--"
+            label.setText(f"{title}: {value}")
 
     @pyqtSlot(QImage)
     def update_frame(self, image: QImage) -> None:

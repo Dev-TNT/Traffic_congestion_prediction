@@ -9,12 +9,12 @@ import cv2
 from core.Get_frame import get_traffic_image, cam_id
 from core.Yolo_detect import image_processing
 
-DEFAULT_OUTPUT = "runs/testdata.csv"
+DEFAULT_OUTPUT = "runs/final_data.csv"
 DEFAULT_CAMERA = "Camera 1"
 DEFAULT_MAX_SECONDS = 24 * 60 * 60
 
 
-def save_rows_to_csv(rows, output_path):
+def save_rows_to_csv(rows, output_path, append=False):
     fieldnames = [
         "timestamp",
         "person",
@@ -30,9 +30,11 @@ def save_rows_to_csv(rows, output_path):
     if directory:
         os.makedirs(directory, exist_ok=True)
         
-    with open(output_path, "w", newline="", encoding="utf-8") as csv_file:
+    write_header = not append or not os.path.exists(output_path) or os.path.getsize(output_path) == 0
+    with open(output_path, "a" if append else "w", newline="", encoding="utf-8") as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
+        if write_header:
+            writer.writeheader()
         writer.writerows(rows)
 
     print(f"Đã lưu dữ liệu vào: {output_path}")
@@ -43,6 +45,9 @@ def collect_data(camera_name=DEFAULT_CAMERA, output_path=DEFAULT_OUTPUT, max_sec
     last_signature = None
     last_annotated_frame = None
     start_time = time.time()
+    flushed = 0
+    if os.path.exists(output_path):
+        raise FileExistsError(f"Chọn --output mới để giữ dữ liệu đã có: {output_path}")
     window_name = "Traffic YOLO Detection"
     cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
 
@@ -58,6 +63,7 @@ def collect_data(camera_name=DEFAULT_CAMERA, output_path=DEFAULT_OUTPUT, max_sec
                 break
 
             frame = get_traffic_image(camera_name)
+            received_at = datetime.now()
             if frame is not None:
                 signature = frame.tobytes()
 
@@ -82,7 +88,7 @@ def collect_data(camera_name=DEFAULT_CAMERA, output_path=DEFAULT_OUTPUT, max_sec
                     last_annotated_frame = annotated_frame
                     cv2.imshow(window_name, annotated_frame)
 
-                    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    timestamp = received_at.strftime("%Y-%m-%d %H:%M:%S")
                     rows.append({
                         "timestamp": timestamp,
                         "person": int(person),
@@ -94,6 +100,9 @@ def collect_data(camera_name=DEFAULT_CAMERA, output_path=DEFAULT_OUTPUT, max_sec
                         "WTI": float(weighted_traffic_impact),
                         "WTI_norm": float(weighted_traffic_impact_norm),
                     })
+                    if len(rows) - flushed >= 5:
+                        save_rows_to_csv(rows[flushed:], output_path, append=True)
+                        flushed = len(rows)
             else:
                 print("Không nhận được hình ảnh từ camera. Đang thử lại...")
 
@@ -104,8 +113,8 @@ def collect_data(camera_name=DEFAULT_CAMERA, output_path=DEFAULT_OUTPUT, max_sec
 
     finally:
         cv2.destroyAllWindows()
-
-    save_rows_to_csv(rows, output_path)
+        if len(rows) > flushed:
+            save_rows_to_csv(rows[flushed:], output_path, append=True)
     return rows
 
 

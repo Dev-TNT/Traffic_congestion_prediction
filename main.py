@@ -17,7 +17,9 @@ def main() -> int:
     window = MainWindow()
     camera_worker = CameraWorker(app)
     camera_worker.frame_ready.connect(window.cameraTab.update_frame)
+    camera_worker.counts_ready.connect(window.dashboardTab.receive_sample)
     app.aboutToQuit.connect(camera_worker.stop)
+    app.aboutToQuit.connect(window.dashboardTab.stop)
 
     window.show()
     camera_worker.start()
