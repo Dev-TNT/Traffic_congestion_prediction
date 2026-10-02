@@ -1,0 +1,52 @@
+{
+  "scenario": "Cold start at each held-out origin, with all 61 input minutes from train-only reference; no live observation yet",
+  "metrics": {
+    "mae_by_horizon": {
+      "1": 4.939809468850392,
+      "2": 4.983193701196859,
+      "3": 4.858163717253505,
+      "4": 5.0806566150274115,
+      "5": 4.943716046417966,
+      "6": 4.941045948995231,
+      "7": 4.569731198996008,
+      "8": 4.689995587666101,
+      "9": 4.913979121854625,
+      "10": 4.76236255732349,
+      "11": 4.817086804838007,
+      "12": 4.573119874567027,
+      "13": 5.0641562077279385,
+      "14": 4.79751508072077,
+      "15": 4.662875752243703,
+      "16": 4.9725036700604734,
+      "17": 4.7159145333576316,
+      "18": 4.960278822116608,
+      "19": 4.989401709896535,
+      "20": 4.928772828675635,
+      "21": 5.140400479833231,
+      "22": 4.868524979367833,
+      "23": 4.6052750431685165,
+      "24": 4.731891824664421,
+      "25": 4.868174178216815,
+      "26": 4.5646313320685685,
+      "27": 4.867592325371709,
+      "28": 4.793956130968042,
+      "29": 4.7604485319430605,
+      "30": 4.884810524345408
+    },
+    "mean_mae": 4.841666153257784,
+    "threshold_events": {
+      "unit": "forecast-origin windows (overlap; not independent episodes)",
+      "evaluated_origins": 1076,
+      "actual_positive_origins": 33,
+      "true_positives": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "false_alarms": 1,
+      "missed_events": 33,
+      "eta_matched_origins": 0,
+      "eta_mae_minutes": null
+    }
+  },
+  "note": "Not a long-running mixed-history test; no parameter or threshold selection on test."
+}

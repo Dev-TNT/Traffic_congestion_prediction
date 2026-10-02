@@ -1,0 +1,30 @@
+{
+  "mode": "live",
+  "initial_viewer_camera": "Camera 2",
+  "initial_viewer_detection_enabled": false,
+  "window_visible": true,
+  "dashboard_visible": true,
+  "actual_points": 0,
+  "reference_history_points": 120,
+  "forecast_points": 0,
+  "reference_minutes_in_history": 0,
+  "is_provisional": false,
+  "forecast_values_count": 0,
+  "display_span_minutes": 239.99999999650754,
+  "reference_overlay_visible": true,
+  "now_centered": true,
+  "viewer_camera": "Camera 2",
+  "viewer_detection_enabled": false,
+  "viewer_changes_during_check": [],
+  "forecast_camera_sources": [],
+  "status": "INSUFFICIENT_DATA · Chưa đủ dữ liệu để dự báo. Cần 61 phút liên tục, không có phút mất mẫu.",
+  "camera_samples": 0,
+  "frames_received": 0,
+  "ui_heartbeat_ticks": 1184,
+  "worker_updates": [
+    "WARNING",
+    "INSUFFICIENT_DATA"
+  ],
+  "model_path": "Z:\\Dev_projects\\Python\\Data_Science\\Traffic_congestion_prediction\\models\\traffic_wti_forecast.joblib",
+  "screenshot_saved": true
+}

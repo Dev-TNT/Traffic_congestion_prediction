@@ -1,0 +1,28 @@
+{
+  "mode": "historical replay",
+  "initial_viewer_camera": "Camera 1",
+  "initial_viewer_detection_enabled": false,
+  "forecast_origin": "2026-09-29 09:15",
+  "window_visible": true,
+  "dashboard_visible": true,
+  "actual_points": 60,
+  "reference_history_points": 0,
+  "forecast_points": 30,
+  "reference_minutes_in_model": 0,
+  "reference_overlay_visible": false,
+  "now_centered": true,
+  "viewer_camera": "Camera 1",
+  "viewer_detection_enabled": false,
+  "viewer_changes_during_check": [],
+  "forecast_camera_sources": [],
+  "status": "NORMAL · Không có cửa sổ vượt ngưỡng ổn định trong 30 phút dự báo.",
+  "camera_samples": 0,
+  "frames_received": 0,
+  "ui_heartbeat_ticks": 75,
+  "worker_updates": [
+    "NORMAL",
+    "NORMAL"
+  ],
+  "model_path": "Z:\\Dev_projects\\Python\\Data_Science\\Traffic_congestion_prediction\\models\\traffic_forecast.joblib",
+  "screenshot_saved": true
+}
